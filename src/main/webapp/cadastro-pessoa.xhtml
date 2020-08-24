@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+>
+
+<ui:composition template="layout.xhtml">
+	<f:metadata>
+		<f:viewParam name="id" value="#{cadastroPessoaBean.pessoa.id}"/>
+
+		<f:viewAction action="#{cadastroPessoaBean.buscarPorId}" if="#{param.id ne null}" />
+	</f:metadata>
+
+	<ui:define name="head">	
+		Cadastro de Pessoa
+	</ui:define>
+	
+	<ui:define name="body">
+		<h:form id="form">		
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:messages 
+					errorClass="alert alert-danger"
+					infoClass="alert alert-info"
+					style="list-style: none; margin: 0; padding: 0"
+				/>
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="form-group" rendered="#{cadastroPessoaBean.pessoa.id ne null}">
+				<h:outputLabel value="Código: " styleClass="control-label" />
+
+				<h:outputText value="#{cadastroPessoaBean.pessoa.id}" />
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="Nome: " styleClass="control-label" />
+
+				<h:inputText
+						id="nome"
+						label="Nome"
+						styleClass="form-control"
+						value="#{cadastroPessoaBean.pessoa.nome}"
+						required="true"
+				/>
+			</h:panelGroup>
+			
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="Sexo: " styleClass="control-label" />
+
+				<h:inputText
+						id="sexo"
+						label="Sexo"
+						styleClass="form-control"
+						value="#{cadastroPessoaBean.pessoa.sexo}"
+						/>
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="E-mail: " styleClass="control-label" />
+
+				<h:inputText
+						id="email"
+						label="E-mail"
+						styleClass="form-control"
+						value="#{cadastroPessoaBean.pessoa.email}"
+				/>
+			</h:panelGroup>
+			
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="Data nacimento: " styleClass="control-label" />
+
+				<h:inputText
+						id="dataNascimento"
+						label="Data nacimento"
+						styleClass="form-control"
+						value="#{cadastroPessoaBean.pessoa.dataNascimento}"
+						required="true">
+						<f:convertDateTime pattern="dd/MM/yyyy"/> 
+				</h:inputText>
+			</h:panelGroup>
+
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="Naturalidade: " styleClass="control-label" />
+
+				<h:inputText
+						id="naturalidade"
+						label="Naturalidade"
+						styleClass="form-control"
+						value="#{cadastroPessoaBean.pessoa.naturalidade}"
+				/>
+			</h:panelGroup>
+			
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="Nacionalidade: " styleClass="control-label" />
+
+				<h:inputText
+						id="nacionalidade"
+						label="Nacionalidade"
+						styleClass="form-control"
+						value="#{cadastroPessoaBean.pessoa.nacionalidade}"
+				/>
+			</h:panelGroup>
+			
+			<h:panelGroup layout="block" styleClass="form-group">
+				<h:outputLabel value="CPF: " styleClass="control-label" />
+
+				<h:inputText
+						id="cpf"
+						label="CPF"
+						styleClass="form-control"
+						value="#{cadastroPessoaBean.pessoa.cpf}"
+						required="true"
+				/>
+			</h:panelGroup>
+			
+			<h:commandButton
+				value="Salvar" styleClass="btn btn-primary btn-large"
+				actionListener="#{cadastroPessoaBean.salvar}"
+			/>
+			
+			<h:commandButton
+				value="Excluir" position="center" styleClass="btn btn-primary btn-large"
+				actionListener="#{cadastroPessoaBean.excluir}"
+			/>
+		</h:form>
+	
+	</ui:define>
+</ui:composition>
+</html>
